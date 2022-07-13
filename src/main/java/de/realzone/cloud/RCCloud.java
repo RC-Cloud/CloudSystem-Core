@@ -1,6 +1,7 @@
 package de.realzone.cloud;
 
 import de.realzone.cloud.command.commands.ShutdownCommand;
+import de.realzone.cloud.command.commands.service.ServiceCreateCommand;
 import de.realzone.cloud.command.commands.service.ServiceHelpCommand;
 import de.realzone.cloud.manager.CloudManager;
 import de.realzone.cloud.manager.CommandManager;
@@ -67,5 +68,6 @@ public class RCCloud {
     private static void registerCommands(){
         RCCloud.getCommandManager().registerCommand(new ServiceHelpCommand());
         RCCloud.getCommandManager().registerCommand(new ShutdownCommand());
+        RCCloud.getCommandManager().registerCommand(new ServiceCreateCommand());
     }
 }

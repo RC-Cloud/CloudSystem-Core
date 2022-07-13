@@ -1,6 +1,7 @@
 package de.realzone.cloud.manager;
 
 import de.realzone.cloud.RCCloud;
+import de.realzone.cloud.api.TerminalReader;
 import de.realzone.cloud.command.Command;
 import de.realzone.cloud.utils.Color;
 import de.realzone.cloud.utils.MessageType;
@@ -31,7 +32,7 @@ public class CommandManager {
         return new Runnable() {
             @Override
             public void run() {
-                LineReader reader = RCCloud.getConsoleManager().createLineReader();
+                LineReader reader = TerminalReader.createLineReader();
 
                 while (true) {
                     String s = reader.readLine(Color.RED + "CloudSystem " + Color.WHITE + "» " + Color.RESET);
