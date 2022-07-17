@@ -10,6 +10,7 @@ import de.realzone.cloud.utils.Color;
 import de.realzone.cloud.utils.MessageType;
 import lombok.Getter;
 
+import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class RCCloud {
@@ -50,24 +51,7 @@ public class RCCloud {
         getConsoleManager().sendMessage("Ready", MessageType.INFO);
 
         //Call Methods
-        registerCommands();
-
-        Thread commandSystem = new Thread(getCommandManager().reading(), "COMMAND");
-        commandSystem.start();
-
-        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
-            @Override
-            public void run() {
-                getConsoleManager().sendMessage(" ", MessageType.NOTHING);
-                getConsoleManager().sendMessage(getCloudManager().getProperties().get("cloud_shutdown").toString(), MessageType.INFO);
-
-            }
-        }));
-    }
-
-    private static void registerCommands(){
-        RCCloud.getCommandManager().registerCommand(new ServiceHelpCommand());
-        RCCloud.getCommandManager().registerCommand(new ShutdownCommand());
-        RCCloud.getCommandManager().registerCommand(new ServiceCreateCommand());
+        getCommandManager().loadCommands();
+        getCommandManager().readCommand();
     }
 }

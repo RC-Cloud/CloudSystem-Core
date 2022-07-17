@@ -1,58 +1,71 @@
 package de.realzone.cloud.manager;
 
 import de.realzone.cloud.RCCloud;
-import de.realzone.cloud.api.TerminalReader;
 import de.realzone.cloud.command.Command;
+import de.realzone.cloud.command.commands.ShutdownCommand;
+import de.realzone.cloud.command.commands.service.ServiceCreateCommand;
+import de.realzone.cloud.command.commands.service.ServiceHelpCommand;
 import de.realzone.cloud.utils.Color;
 import de.realzone.cloud.utils.MessageType;
-import lombok.Getter;
-import org.jline.reader.LineReader;
+import de.realzone.cloud.utils.Utils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class CommandManager {
 
-    @Getter
-    private final HashMap<String, Command> commands = new HashMap<>();
+    private Set<Command> commands;
+    private Scanner scanner = new Scanner(System.in);
 
-    public void registerCommand(Command command) {
-        commands.put(command.getCommand().toLowerCase(), command);
+    public CommandManager() {
+        this.commands = new HashSet<Command>();
+    }
 
-        if (command.getAlias() == null) return;
+    public void addCommand(Command cmd) {
+        this.commands.add(cmd);
+    }
 
-        for (String alias : command.getAlias()) {
-            commands.put(alias.toLowerCase(), command);
+    public void executeCommand(String command, String[] args) {
+        Command cmd = getCommand(command);
+
+        if (cmd != null) {
+            cmd.onCommand(args);
+        } else {
+            RCCloud.getConsoleManager().sendMessage(RCCloud.getCloudManager().getProperties().getProperty("command_not_found"), MessageType.INFO);
         }
     }
 
-    public Runnable reading() {
-        return new Runnable() {
-            @Override
-            public void run() {
-                LineReader reader = TerminalReader.createLineReader();
+    public Command getCommand(String name) {
 
-                while (true) {
-                    String s = reader.readLine(Color.RED + "CloudSystem " + Color.WHITE + "» " + Color.RESET);
-                    String[] input = s.split(" ");
-
-                    if (commands.containsKey(input[0].toLowerCase())) {
-                        List<String> args = new ArrayList<>();
-                        for (String i : input) {
-                            if (!i.equalsIgnoreCase(input[0])) {
-                                args.add(i);
-                            }
-                        }
-                        commands.get(input[0].toLowerCase()).execute(args.toArray(new String[0]));
-                    } else {
-                        RCCloud.getConsoleManager().sendMessage("The Command '" + input[0] + "' could not be found! Type 'help' for help.", MessageType.INFO);
-                    }
-
-                }
+        for (Command command : this.commands) {
+            if (command.getCommand().equalsIgnoreCase(name)) {
+                return command;
             }
-        };
+        }
+        return null;
     }
 
+    public void loadCommands() {
+        addCommand(new ShutdownCommand());
+        addCommand(new ServiceCreateCommand());
+        addCommand(new ServiceHelpCommand());
+    }
+
+    public Set<Command> getCommands() {
+        return commands;
+    }
+
+    public void readCommand() {
+
+        String answer;
+        while (true) {
+            System.out.print(Color.RED + "CloudSystem " + Color.WHITE + "» " + Color.RESET + "\r");
+            answer = scanner.nextLine();
+
+            String command = answer.split(" ")[0];
+            String[] args = Utils.dropFirstString(answer.split(" "));
+
+            executeCommand(command, args);
+
+        }
+    }
 }

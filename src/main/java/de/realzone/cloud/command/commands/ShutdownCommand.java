@@ -12,12 +12,13 @@ public class ShutdownCommand extends Command {
     }
 
     @Override
-    public void execute(String[] args) {
+    public void onCommand(String[] args) {
 
         if(args.length == 0){
-            RCCloud.getConsoleManager().sendMessage("Please use 'shutdown confirm' to stop the Cloud", MessageType.INFO);
+            RCCloud.getConsoleManager().sendMessage(RCCloud.getCloudManager().getProperties().getProperty("cloud_shutdown_confirm"), MessageType.INFO);
 
         }else if(args.length == 1 && args[0].equalsIgnoreCase("confirm")){
+            RCCloud.getConsoleManager().sendMessage(RCCloud.getCloudManager().getProperties().getProperty("cloud_shutdown"), MessageType.INFO);
             System.exit(0);
         }
     }

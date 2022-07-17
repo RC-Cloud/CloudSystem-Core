@@ -18,6 +18,6 @@ public abstract class Command {
         this.alias = null;
     }
 
-    public abstract void execute(String[] args);
+    public abstract void onCommand(String[] args);
 
 }

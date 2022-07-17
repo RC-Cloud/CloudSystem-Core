@@ -13,9 +13,9 @@ public class ServiceHelpCommand extends Command {
 
     private static String serviceprefix = Color.BLUE + "service " + Color.RESET;
     @Override
-    public void execute(String[] args) {
+    public void onCommand(String[] args) {
         if(args.length == 0 || args[0].equalsIgnoreCase("help")) {
-            RCCloud.getConsoleManager().sendMessage("" +
+            RCCloud.getConsoleManager().sendMessage("\n" +
                     serviceprefix + "create {Name} > " + RCCloud.getCloudManager().getProperties().getProperty("service_create") + "\n" +
                     serviceprefix + "delete {Name} > " + RCCloud.getCloudManager().getProperties().getProperty("service_delete") + "\n" +
                     serviceprefix + "stop {Name} > " + RCCloud.getCloudManager().getProperties().getProperty("service_stop") + "\n" +
