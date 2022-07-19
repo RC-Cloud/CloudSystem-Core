@@ -1,6 +1,9 @@
 package de.realzone.cloud.command.commands.service;
 
 import de.realzone.cloud.RCCloud;
+import de.realzone.cloud.api.enums.ServerType;
+import de.realzone.cloud.api.utils.APIUtils;
+import de.realzone.cloud.api.utils.DownloadSoftware;
 import de.realzone.cloud.command.Command;
 import de.realzone.cloud.utils.MessageType;
 
@@ -30,12 +33,36 @@ public class ServiceCreateCommand extends Command {
             RCCloud.getConsoleManager().sendMessage(RCCloud.getCloudManager().getProperties().getProperty("service_create_type"), MessageType.SAMELINE);
             String serverSoftware = scanner.nextLine();
             if(serverSoftware.equalsIgnoreCase("Paper") || serverSoftware.equalsIgnoreCase("Spigot")){
-
+                //Server Software is valid
             }else if (serverSoftware.equalsIgnoreCase("BungeeCord")){
 
+                //BungeeCord start
+                try {
+                    RCCloud.getConsoleManager().sendMessage(RCCloud.getCloudManager().getProperties().getProperty("service_create_ram"), MessageType.SAMELINE);
+                    int ram = Integer.parseInt(scanner.nextLine());
+
+                    RCCloud.getConsoleManager().sendMessage(RCCloud.getCloudManager().getProperties().getProperty("service_create_port"), MessageType.SAMELINE);
+                    int port = Integer.parseInt(scanner.nextLine());
+
+                    APIUtils.createStartFile(serviceName, ServerType.BUNGEECORD, ram);
+                    APIUtils.createJsonFile(serviceName, "1.19", ServerType.BUNGEECORD, ram, port);
+
+                }catch (NumberFormatException e){
+                    RCCloud.getConsoleManager().sendMessage(RCCloud.getCloudManager().getProperties().getProperty("invalid_number"), MessageType.ERROR);
+                    return;
+                }
+
+                RCCloud.getConsoleManager().sendMessage("Downloading BungeeCord...", MessageType.INFO);
+                DownloadSoftware.downloadSoftwareBungeeCord();
+                RCCloud.getConsoleManager().sendMessage("BungeeCord downloaded.", MessageType.INFO);
+                APIUtils.moveToServerDirectory(serviceName, "bungeecord.jar");
+
+                return;
             }else{
                 RCCloud.getConsoleManager().sendMessage(RCCloud.getCloudManager().getProperties().getProperty("invalid_server_software"), MessageType.ERROR);
+                return;
             }
+            //BungeeCord end
 
             RCCloud.getConsoleManager().sendMessage(RCCloud.getCloudManager().getProperties().getProperty("service_create_version"), MessageType.SAMELINE);
             String serverVersion = scanner.nextLine();
@@ -59,6 +86,7 @@ public class ServiceCreateCommand extends Command {
                 int port = Integer.parseInt(scanner.nextLine());
             }catch (NumberFormatException e){
                 RCCloud.getConsoleManager().sendMessage(RCCloud.getCloudManager().getProperties().getProperty("invalid_number"), MessageType.ERROR);
+                return;
             }
         }
     }

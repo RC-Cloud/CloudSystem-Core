@@ -121,7 +121,7 @@ public class DownloadSoftware {
     public static void downloadSoftwareBungeeCord() {
         try {
             InputStream in = new URL("https://api.papermc.io/v2/projects/waterfall/versions/1.19/builds/498/downloads/waterfall-1.19-498.jar").openStream();
-            Files.copy(in, Paths.get("waterfall.jar"), StandardCopyOption.REPLACE_EXISTING);
+            Files.copy(in, Paths.get("bungeecord.jar"), StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
             e.printStackTrace();
         }
