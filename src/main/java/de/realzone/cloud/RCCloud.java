@@ -1,5 +1,7 @@
 package de.realzone.cloud;
 
+import com.google.gson.Gson;
+import de.realzone.cloud.api.DownloadSoftware;
 import de.realzone.cloud.command.commands.ShutdownCommand;
 import de.realzone.cloud.command.commands.service.ServiceCreateCommand;
 import de.realzone.cloud.command.commands.service.ServiceHelpCommand;
@@ -9,7 +11,16 @@ import de.realzone.cloud.manager.ConsoleManager;
 import de.realzone.cloud.utils.Color;
 import de.realzone.cloud.utils.MessageType;
 import lombok.Getter;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Map;
+import java.util.Objects;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
@@ -35,6 +46,7 @@ public class RCCloud {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        DownloadSoftware.downloadSoftwareSpigot("1.15.2");
 
         getConsoleManager().sendMessage("" + Color.CYAN +
                 "" +
