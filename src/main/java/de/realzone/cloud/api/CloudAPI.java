@@ -1,5 +1,8 @@
 package de.realzone.cloud.api;
 
+import de.realzone.cloud.api.enums.ServerType;
+import de.realzone.cloud.api.utils.DownloadSoftware;
+
 public class CloudAPI {
 
     public static void createServer(String serverName, String version, ServerType serverType, int ram, int port) {
