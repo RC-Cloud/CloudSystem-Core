@@ -88,7 +88,7 @@ public class ServiceCreateCommand extends Command {
                 if(serverSoftware.equalsIgnoreCase("Paper")){
                     APIUtils.createStartFile(serviceName, ServerType.PAPER, ram);
                     APIUtils.createJsonFile(serviceName, serverVersion, ServerType.PAPER, ram, port);
-                    RCCloud.getConsoleManager().sendMessage(RCCloud.getCloudManager().getProperties().getProperty("downloading_paper"), MessageType.SAMELINE);
+                    RCCloud.getConsoleManager().sendMessage(RCCloud.getCloudManager().getProperties().getProperty("downloading_paper"), MessageType.INFO);
 
                     DownloadSoftware.downloadSoftwarePaper(serverVersion);
                     APIUtils.moveToServerDirectory(serviceName, "paper.jar");
@@ -96,7 +96,7 @@ public class ServiceCreateCommand extends Command {
                 }else if(serverSoftware.equalsIgnoreCase("Spigot")){
                     APIUtils.createStartFile(serviceName, ServerType.SPIGOT, ram);
                     APIUtils.createJsonFile(serviceName, serverVersion, ServerType.SPIGOT, ram, port);
-                    RCCloud.getConsoleManager().sendMessage(RCCloud.getCloudManager().getProperties().getProperty("downloading_spigot"), MessageType.SAMELINE);
+                    RCCloud.getConsoleManager().sendMessage(RCCloud.getCloudManager().getProperties().getProperty("downloading_spigot"), MessageType.INFO);
                     DownloadSoftware.downloadSoftwareSpigot(serverVersion);
                     APIUtils.moveToServerDirectory(serviceName, "spigot.jar");
                 }
