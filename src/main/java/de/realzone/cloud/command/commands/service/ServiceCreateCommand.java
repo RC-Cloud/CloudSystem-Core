@@ -9,7 +9,7 @@ import de.realzone.cloud.utils.MessageType;
 
 import java.util.Scanner;
 
-import static de.realzone.cloud.utils.Utils.sendHelpMessage;
+import static de.realzone.cloud.utils.Utils.sendServiceHelpMessage;
 
 public class ServiceCreateCommand extends Command {
 
@@ -20,21 +20,20 @@ public class ServiceCreateCommand extends Command {
     @Override
     public void onCommand(String[] args) {
 
-        if(args.length == 0){
-            sendHelpMessage();
-        }
+        if (args.length == 0) {
+            sendServiceHelpMessage();
 
-        Scanner scanner = new Scanner(System.in);
-        if(args.length == 1 && args[0].equalsIgnoreCase("create")){
+        } else if (args.length == 1 && args[0].equalsIgnoreCase("create")) {
+            Scanner scanner = new Scanner(System.in);
 
             RCCloud.getConsoleManager().sendMessage(RCCloud.getCloudManager().getProperties().getProperty("service_create_name"), MessageType.SAMELINE);
             String serviceName = scanner.nextLine();
 
             RCCloud.getConsoleManager().sendMessage(RCCloud.getCloudManager().getProperties().getProperty("service_create_type"), MessageType.SAMELINE);
             String serverSoftware = scanner.nextLine();
-            if(serverSoftware.equalsIgnoreCase("Paper") || serverSoftware.equalsIgnoreCase("Spigot")){
+            if (serverSoftware.equalsIgnoreCase("Paper") || serverSoftware.equalsIgnoreCase("Spigot")) {
                 //Server Software is valid
-            }else if (serverSoftware.equalsIgnoreCase("BungeeCord")){
+            } else if (serverSoftware.equalsIgnoreCase("BungeeCord")) {
 
                 //BungeeCord start
                 try {
@@ -47,7 +46,7 @@ public class ServiceCreateCommand extends Command {
                     APIUtils.createStartFile(serviceName, ServerType.BUNGEECORD, ram);
                     APIUtils.createJsonFile(serviceName, "1.19", ServerType.BUNGEECORD, ram, port);
 
-                }catch (NumberFormatException e){
+                } catch (NumberFormatException e) {
                     RCCloud.getConsoleManager().sendMessage(RCCloud.getCloudManager().getProperties().getProperty("invalid_number"), MessageType.ERROR);
                     return;
                 }
@@ -58,7 +57,7 @@ public class ServiceCreateCommand extends Command {
                 APIUtils.moveToServerDirectory(serviceName, "bungeecord.jar");
 
                 return;
-            }else{
+            } else {
                 RCCloud.getConsoleManager().sendMessage(RCCloud.getCloudManager().getProperties().getProperty("invalid_server_software"), MessageType.ERROR);
                 return;
             }
@@ -71,9 +70,9 @@ public class ServiceCreateCommand extends Command {
                     || serverVersion.equalsIgnoreCase("1.15") || serverVersion.equalsIgnoreCase("1.14")
                     || serverVersion.equalsIgnoreCase("1.13") || serverVersion.equalsIgnoreCase("1.12")
                     || serverVersion.equalsIgnoreCase("1.11") || serverVersion.equalsIgnoreCase("1.10")
-                    || serverVersion.equalsIgnoreCase("1.9")  || serverVersion.equalsIgnoreCase("1.8")){
+                    || serverVersion.equalsIgnoreCase("1.9") || serverVersion.equalsIgnoreCase("1.8")) {
                 //Version is valid
-            }else{
+            } else {
                 RCCloud.getConsoleManager().sendMessage(RCCloud.getCloudManager().getProperties().getProperty("invalid_server_version"), MessageType.ERROR);
                 return;
             }
@@ -85,7 +84,7 @@ public class ServiceCreateCommand extends Command {
                 RCCloud.getConsoleManager().sendMessage(RCCloud.getCloudManager().getProperties().getProperty("service_create_port"), MessageType.SAMELINE);
                 int port = Integer.parseInt(scanner.nextLine());
 
-                if(serverSoftware.equalsIgnoreCase("Paper")){
+                if (serverSoftware.equalsIgnoreCase("Paper")) {
                     APIUtils.createStartFile(serviceName, ServerType.PAPER, ram);
                     APIUtils.createJsonFile(serviceName, serverVersion, ServerType.PAPER, ram, port);
                     RCCloud.getConsoleManager().sendMessage(RCCloud.getCloudManager().getProperties().getProperty("downloading_paper"), MessageType.INFO);
@@ -93,7 +92,7 @@ public class ServiceCreateCommand extends Command {
                     DownloadSoftware.downloadSoftwarePaper(serverVersion);
                     APIUtils.moveToServerDirectory(serviceName, "paper.jar");
 
-                }else if(serverSoftware.equalsIgnoreCase("Spigot")){
+                } else if (serverSoftware.equalsIgnoreCase("Spigot")) {
                     APIUtils.createStartFile(serviceName, ServerType.SPIGOT, ram);
                     APIUtils.createJsonFile(serviceName, serverVersion, ServerType.SPIGOT, ram, port);
                     RCCloud.getConsoleManager().sendMessage(RCCloud.getCloudManager().getProperties().getProperty("downloading_spigot"), MessageType.INFO);
@@ -103,7 +102,7 @@ public class ServiceCreateCommand extends Command {
 
                 APIUtils.createServerProperties(serviceName, port);
                 RCCloud.getConsoleManager().sendMessage(RCCloud.getCloudManager().getProperties().getProperty("finished_downloading"), MessageType.INFO);
-            }catch (NumberFormatException e){
+            } catch (NumberFormatException e) {
                 RCCloud.getConsoleManager().sendMessage(RCCloud.getCloudManager().getProperties().getProperty("invalid_number"), MessageType.ERROR);
                 return;
             }

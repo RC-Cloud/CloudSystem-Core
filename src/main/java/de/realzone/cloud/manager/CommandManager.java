@@ -7,6 +7,7 @@ import de.realzone.cloud.command.commands.plugin.DownloadPlugin;
 import de.realzone.cloud.command.commands.plugin.PluginHelpCommand;
 import de.realzone.cloud.command.commands.service.ServiceCreateCommand;
 import de.realzone.cloud.command.commands.service.ServiceDeleteCommand;
+import de.realzone.cloud.command.commands.service.ServiceInfoCommand;
 import de.realzone.cloud.utils.Color;
 import de.realzone.cloud.utils.MessageType;
 import de.realzone.cloud.utils.Utils;
@@ -47,9 +48,11 @@ public class CommandManager {
     }
 
     public void loadCommands() {
+        //TODO: sort commands
         addCommand(new ShutdownCommand());
         addCommand(new ServiceCreateCommand());
         addCommand(new ServiceDeleteCommand());
+        addCommand(new ServiceInfoCommand());
         addCommand(new PluginHelpCommand());
         addCommand(new DownloadPlugin());
     }

@@ -10,7 +10,7 @@ public class Utils {
         return strings;
     }
 
-    public static void sendHelpMessage(){
+    public static void sendServiceHelpMessage(){
 
         String serviceprefix = Color.BLUE + "service " + Color.RESET;
 

@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
@@ -180,6 +181,32 @@ public class APIUtils {
         if (!directory.exists()) {
             directory.mkdirs();
         }
+    }
+
+    public static boolean findServer(String serverName){
+        Path serverPath = Paths.get("/home/servers/" + serverName);
+        if(Files.exists(serverPath)){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static boolean deleteServer(File directory) {
+        if(directory.exists()){
+            File[] files = directory.listFiles();
+            if(null!=files){
+                for(int i=0; i<files.length; i++) {
+                    if(files[i].isDirectory()) {
+                        deleteServer(files[i]);
+                    }
+                    else {
+                        files[i].delete();
+                    }
+                }
+            }
+        }
+        return(directory.delete());
     }
 
     public static void installPlugins(String serverName, Plugins pluginName) {
