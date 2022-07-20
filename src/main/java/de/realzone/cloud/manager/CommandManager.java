@@ -3,6 +3,8 @@ package de.realzone.cloud.manager;
 import de.realzone.cloud.RCCloud;
 import de.realzone.cloud.command.Command;
 import de.realzone.cloud.command.commands.ShutdownCommand;
+import de.realzone.cloud.command.commands.plugin.DownloadPlugin;
+import de.realzone.cloud.command.commands.plugin.PluginHelpCommand;
 import de.realzone.cloud.command.commands.service.ServiceCreateCommand;
 import de.realzone.cloud.command.commands.service.ServiceDeleteCommand;
 import de.realzone.cloud.utils.Color;
@@ -48,6 +50,8 @@ public class CommandManager {
         addCommand(new ShutdownCommand());
         addCommand(new ServiceCreateCommand());
         addCommand(new ServiceDeleteCommand());
+        addCommand(new PluginHelpCommand());
+        addCommand(new DownloadPlugin());
     }
 
     public Set<Command> getCommands() {

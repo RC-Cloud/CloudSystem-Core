@@ -52,9 +52,9 @@ public class ServiceCreateCommand extends Command {
                     return;
                 }
 
-                RCCloud.getConsoleManager().sendMessage("Downloading BungeeCord...", MessageType.INFO);
+                RCCloud.getConsoleManager().sendMessage(RCCloud.getCloudManager().getProperties().getProperty("downloading_bungeecord"), MessageType.INFO);
                 DownloadSoftware.downloadSoftwareBungeeCord();
-                RCCloud.getConsoleManager().sendMessage("BungeeCord downloaded.", MessageType.INFO);
+                RCCloud.getConsoleManager().sendMessage(RCCloud.getCloudManager().getProperties().getProperty("finished_downloading_bungeecord"), MessageType.INFO);
                 APIUtils.moveToServerDirectory(serviceName, "bungeecord.jar");
 
                 return;
@@ -88,7 +88,7 @@ public class ServiceCreateCommand extends Command {
                 if(serverSoftware.equalsIgnoreCase("Paper")){
                     APIUtils.createStartFile(serviceName, ServerType.PAPER, ram);
                     APIUtils.createJsonFile(serviceName, serverVersion, ServerType.PAPER, ram, port);
-                    RCCloud.getConsoleManager().sendMessage("Downloading Paper...", MessageType.SAMELINE);
+                    RCCloud.getConsoleManager().sendMessage(RCCloud.getCloudManager().getProperties().getProperty("downloading_paper"), MessageType.SAMELINE);
 
                     DownloadSoftware.downloadSoftwarePaper(serverVersion);
                     APIUtils.moveToServerDirectory(serviceName, "paper.jar");
@@ -96,19 +96,19 @@ public class ServiceCreateCommand extends Command {
                 }else if(serverSoftware.equalsIgnoreCase("Spigot")){
                     APIUtils.createStartFile(serviceName, ServerType.SPIGOT, ram);
                     APIUtils.createJsonFile(serviceName, serverVersion, ServerType.SPIGOT, ram, port);
-                    RCCloud.getConsoleManager().sendMessage("Downloading Spigot", MessageType.SAMELINE);
+                    RCCloud.getConsoleManager().sendMessage(RCCloud.getCloudManager().getProperties().getProperty("downloading_spigot"), MessageType.SAMELINE);
                     DownloadSoftware.downloadSoftwareSpigot(serverVersion);
                     APIUtils.moveToServerDirectory(serviceName, "spigot.jar");
                 }
 
                 APIUtils.createServerProperties(serviceName, port);
-                RCCloud.getConsoleManager().sendMessage("Download completed...", MessageType.INFO);
+                RCCloud.getConsoleManager().sendMessage(RCCloud.getCloudManager().getProperties().getProperty("finished_downloading"), MessageType.INFO);
             }catch (NumberFormatException e){
                 RCCloud.getConsoleManager().sendMessage(RCCloud.getCloudManager().getProperties().getProperty("invalid_number"), MessageType.ERROR);
                 return;
             }
             APIUtils.createEula(serviceName);
-            RCCloud.getConsoleManager().sendMessage("Service created", MessageType.INFO);
+            RCCloud.getConsoleManager().sendMessage(RCCloud.getCloudManager().getProperties().getProperty("service_created"), MessageType.INFO);
         }
     }
 }
