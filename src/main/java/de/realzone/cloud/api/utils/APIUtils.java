@@ -1,16 +1,12 @@
 package de.realzone.cloud.api.utils;
 
-import de.realzone.cloud.RCCloud;
 import de.realzone.cloud.api.enums.Plugins;
 import de.realzone.cloud.api.enums.ServerType;
-import de.realzone.cloud.utils.Color;
-import de.realzone.cloud.utils.MessageType;
 import org.json.simple.JSONObject;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
@@ -26,7 +22,13 @@ public class APIUtils {
         }
     }
 
-    public static void renameFile(String serverName, String fileName, String newFileName) {
+    public static void renameFile(String fileName, String newFileName) {
+
+        try {
+            Files.move(Paths.get(fileName), Paths.get(newFileName), StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -172,6 +174,52 @@ public class APIUtils {
     }
 
     public static void installPlugins(String serverName, Plugins pluginName) {
+
+        if(pluginName == Plugins.ESSENTIALSX){
+            DownloadSoftware.downloadPlugin("EssentialsX", "https://github.com/EssentialsX/Essentials/releases/download/2.19.4/EssentialsX-2.19.4.jar");
+            moveToServerDirectory(serverName, "EssentialsX.jar");
+
+        }else if(pluginName == Plugins.LUCKPERMS){
+            DownloadSoftware.downloadPlugin("LuckPerms", "https://download.luckperms.net/1441/bukkit/loader/LuckPerms-Bukkit-5.4.33.jar");
+            moveToServerDirectory(serverName, "LuckPerms.jar");
+
+        }else if(pluginName == Plugins.MAINTENANCE){
+            DownloadSoftware.downloadPlugin("Maintenance", "https://github.com/kennytv/Maintenance/releases/download/4.0.1/Maintenance.jar");
+            moveToServerDirectory(serverName, "Maintenance.jar");
+
+        }else if(pluginName == Plugins.PEX){
+            DownloadSoftware.downloadPlugin("PermissionsEX", "https://github.com/PEXPlugins/PermissionsEx/releases/download/STABLE-1.23.4/PermissionsEx-1.23.4.jar");
+            moveToServerDirectory(serverName, "PermissionsEX.jar");
+
+        }else if(pluginName == Plugins.PROTOCOLLIB){
+            DownloadSoftware.downloadPlugin("ProtocolLib ", "https://github.com/dmulloy2/ProtocolLib/releases/download/4.8.0/ProtocolLib.jar");
+            moveToServerDirectory(serverName, "ProtocolLib.jar");
+
+        }else if(pluginName == Plugins.TAB){
+            DownloadSoftware.downloadPlugin("Tab", "https://github.com/NEZNAMY/TAB/releases/download/3.1.2/TAB.v3.1.2.jar");
+            moveToServerDirectory(serverName, "Tab.jar");
+
+        }else if(pluginName == Plugins.VAULT){
+            DownloadSoftware.downloadPlugin("Vault", "https://github.com/MilkBowl/Vault/releases/download/1.7.3/Vault.jar");
+            moveToServerDirectory(serverName, "Vault.jar");
+
+        }else if(pluginName == Plugins.VIABACKWARDS){
+            DownloadSoftware.downloadPlugin("ViaBackwards", "https://github.com/ViaVersion/ViaBackwards/releases/download/4.3.1/ViaBackwards-4.3.1.jar");
+            moveToServerDirectory(serverName, "ViaBackwards.jar");
+
+        }else if(pluginName == Plugins.VIAVERSION){
+            DownloadSoftware.downloadPlugin("ViaVersion", "https://github.com/ViaVersion/ViaVersion/releases/download/4.3.1/ViaVersion-4.3.1.jar");
+            moveToServerDirectory(serverName, "ViaVersion.jar");
+
+        }else if(pluginName == Plugins.WORLDEDIT){
+            DownloadSoftware.downloadPlugin("Worldedit", "https://dev.bukkit.org/projects/worldedit/files/latest");
+            moveToServerDirectory(serverName, "Worldedit.jar");
+
+        }else if(pluginName == Plugins.WORLDGUARD){
+            DownloadSoftware.downloadPlugin("WorldGuard", "https://dev.bukkit.org/projects/worldguard/files/latest");
+            moveToServerDirectory(serverName, "WorldGuard.jar");
+
+        }
 
     }
 }

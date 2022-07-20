@@ -1,5 +1,7 @@
 package de.realzone.cloud.api.utils;
 
+import de.realzone.cloud.api.enums.Plugins;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -9,6 +11,18 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 public class DownloadSoftware {
+
+    public static void downloadPlugin(String pluginName, String downloadUrl){
+
+        try {
+            URL url = new URL(downloadUrl);
+            InputStream is = url.openStream();
+            Files.copy(is, Paths.get(pluginName + ".jar"), StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 
     public static void downloadSoftwareSpigot(String version) {
 

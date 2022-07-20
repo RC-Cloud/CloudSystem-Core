@@ -19,7 +19,7 @@ public class ConsoleManager {
             case DEBUG -> System.out.println(debug + message + Color.RESET);
             case NOTHING -> System.out.println(message + Color.RESET);
             case PREFIX -> System.out.println(prefix + message + Color.RESET);
-            case SAMELINE -> System.out.print(message + Color.RESET + "\r");
+            case SAMELINE -> System.out.print(message + Color.RESET);
         }
     }
 }
