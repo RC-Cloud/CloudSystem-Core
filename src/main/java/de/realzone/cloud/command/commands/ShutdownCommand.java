@@ -8,7 +8,7 @@ import de.realzone.cloud.utils.MessageType;
 public class ShutdownCommand extends Command {
 
     public ShutdownCommand() {
-        super("shutdown", "exit", "stop");
+        super("shutdown");
     }
 
     @Override

@@ -1,4 +1,4 @@
-package de.realzone.cloud.api;
+package de.realzone.cloud.api.utils;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,6 +11,30 @@ import java.nio.file.StandardCopyOption;
 public class DownloadSoftware {
 
     public static void downloadSoftwareSpigot(String version) {
+
+        if(version.equalsIgnoreCase("1.17")){
+            try {
+                InputStream in = new URL("https://download.getbukkit.org/spigot/spigot-1.17.jar").openStream();
+                Files.copy(in, Paths.get("spigot.jar"), StandardCopyOption.REPLACE_EXISTING);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else if (version.equalsIgnoreCase("1.18")) {
+            try {
+                InputStream in = new URL("https://download.getbukkit.org/spigot/spigot-1.18.jar").openStream();
+                Files.copy(in, Paths.get("spigot.jar"), StandardCopyOption.REPLACE_EXISTING);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }else if (version.equalsIgnoreCase("1.19")){
+            try {
+                InputStream in = new URL("https://download.getbukkit.org/spigot/spigot-1.19.jar").openStream();
+                Files.copy(in, Paths.get("spigot.jar"), StandardCopyOption.REPLACE_EXISTING);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
         try {
             InputStream in = new URL("https://cdn.getbukkit.org/spigot/spigot-" + version + ".jar").openStream();
             Files.copy(in, Paths.get("spigot.jar"), StandardCopyOption.REPLACE_EXISTING);
@@ -121,7 +145,7 @@ public class DownloadSoftware {
     public static void downloadSoftwareBungeeCord() {
         try {
             InputStream in = new URL("https://api.papermc.io/v2/projects/waterfall/versions/1.19/builds/498/downloads/waterfall-1.19-498.jar").openStream();
-            Files.copy(in, Paths.get("waterfall.jar"), StandardCopyOption.REPLACE_EXISTING);
+            Files.copy(in, Paths.get("bungeecord.jar"), StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
             e.printStackTrace();
         }

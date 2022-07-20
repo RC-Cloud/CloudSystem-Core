@@ -4,7 +4,7 @@ import de.realzone.cloud.RCCloud;
 import de.realzone.cloud.command.Command;
 import de.realzone.cloud.command.commands.ShutdownCommand;
 import de.realzone.cloud.command.commands.service.ServiceCreateCommand;
-import de.realzone.cloud.command.commands.service.ServiceHelpCommand;
+import de.realzone.cloud.command.commands.service.ServiceDeleteCommand;
 import de.realzone.cloud.utils.Color;
 import de.realzone.cloud.utils.MessageType;
 import de.realzone.cloud.utils.Utils;
@@ -47,7 +47,7 @@ public class CommandManager {
     public void loadCommands() {
         addCommand(new ShutdownCommand());
         addCommand(new ServiceCreateCommand());
-        addCommand(new ServiceHelpCommand());
+        addCommand(new ServiceDeleteCommand());
     }
 
     public Set<Command> getCommands() {

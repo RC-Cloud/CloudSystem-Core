@@ -1,6 +1,5 @@
 package de.realzone.cloud;
 
-import de.realzone.cloud.api.DownloadSoftware;
 import de.realzone.cloud.manager.CloudManager;
 import de.realzone.cloud.manager.CommandManager;
 import de.realzone.cloud.manager.ConsoleManager;
@@ -32,7 +31,6 @@ public class RCCloud {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        DownloadSoftware.downloadSoftwareSpigot("1.15.2");
 
         getConsoleManager().sendMessage("" + Color.CYAN +
                 "" +
