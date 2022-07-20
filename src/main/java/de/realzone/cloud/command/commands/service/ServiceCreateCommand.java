@@ -24,8 +24,8 @@ public class ServiceCreateCommand extends Command {
             sendHelpMessage();
         }
 
+        Scanner scanner = new Scanner(System.in);
         if(args.length == 1 && args[0].equalsIgnoreCase("create")){
-            Scanner scanner = new Scanner(System.in); //Todo create Cloud.json file, create Server
 
             RCCloud.getConsoleManager().sendMessage(RCCloud.getCloudManager().getProperties().getProperty("service_create_name"), MessageType.SAMELINE);
             String serviceName = scanner.nextLine();
@@ -84,10 +84,31 @@ public class ServiceCreateCommand extends Command {
 
                 RCCloud.getConsoleManager().sendMessage(RCCloud.getCloudManager().getProperties().getProperty("service_create_port"), MessageType.SAMELINE);
                 int port = Integer.parseInt(scanner.nextLine());
+
+                if(serverSoftware.equalsIgnoreCase("Paper")){
+                    APIUtils.createStartFile(serviceName, ServerType.PAPER, ram);
+                    APIUtils.createJsonFile(serviceName, serverVersion, ServerType.PAPER, ram, port);
+                    RCCloud.getConsoleManager().sendMessage("Downloading Paper...", MessageType.SAMELINE);
+
+                    DownloadSoftware.downloadSoftwarePaper(serverVersion);
+                    APIUtils.moveToServerDirectory(serviceName, "paper.jar");
+
+                }else if(serverSoftware.equalsIgnoreCase("Spigot")){
+                    APIUtils.createStartFile(serviceName, ServerType.SPIGOT, ram);
+                    APIUtils.createJsonFile(serviceName, serverVersion, ServerType.SPIGOT, ram, port);
+                    RCCloud.getConsoleManager().sendMessage("Downloading Spigot", MessageType.SAMELINE);
+                    DownloadSoftware.downloadSoftwareSpigot(serverVersion);
+                    APIUtils.moveToServerDirectory(serviceName, "spigot.jar");
+                }
+
+                APIUtils.createServerProperties(serviceName, port);
+                RCCloud.getConsoleManager().sendMessage("Download completed...", MessageType.INFO);
             }catch (NumberFormatException e){
                 RCCloud.getConsoleManager().sendMessage(RCCloud.getCloudManager().getProperties().getProperty("invalid_number"), MessageType.ERROR);
                 return;
             }
+            APIUtils.createEula(serviceName);
+            RCCloud.getConsoleManager().sendMessage("Service created", MessageType.INFO);
         }
     }
 }

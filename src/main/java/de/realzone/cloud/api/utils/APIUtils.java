@@ -52,7 +52,6 @@ public class APIUtils {
             info.put("version", version);
             info.put("port", port);
             info.put("ram", ram);
-            info.put("ip", port);
 
 
             if(serverType == ServerType.BUNGEECORD){
@@ -80,25 +79,82 @@ public class APIUtils {
         moveToServerDirectory(serverName, "cloud.json");
     }
 
-    public static void createServerProperties(String serverName) {
+    public static void createServerProperties(String serverName, int port) {
+        FileWriter serverprop = null;
+        try {
+            serverprop = new FileWriter("server.properties");
 
-    }
+        serverprop.write("#Minecraft server properties\n" +
+                "enable-jmx-monitoring=false\n" +
+                "rcon.port=" + port + "\n" +
+                "level-seed=\n" +
+                "gamemode=survival\n" +
+                "enable-command-block=false\n" +
+                "enable-query=false\n" +
+                "generator-settings=\n" +
+                "level-name=world\n" +
+                "motd=A Minecraft Server\n" +
+                "query.port=" + port + "\n" +
+                "pvp=true\n" +
+                "generate-structures=true\n" +
+                "difficulty=easy\n" +
+                "network-compression-threshold=256\n" +
+                "max-tick-time=60000\n" +
+                "use-native-transport=true\n" +
+                "max-players=20\n" +
+                "online-mode=true\n" +
+                "enable-status=true\n" +
+                "allow-flight=false\n" +
+                "broadcast-rcon-to-ops=true\n" +
+                "view-distance=10\n" +
+                "max-build-height=256\n" +
+                "server-ip=\n" +
+                "allow-nether=true\n" +
+                "server-port=" + port + "\n" +
+                "enable-rcon=false\n" +
+                "sync-chunk-writes=true\n" +
+                "op-permission-level=4\n" +
+                "prevent-proxy-connections=false\n" +
+                "resource-pack=\n" +
+                "entity-broadcast-range-percentage=100\n" +
+                "rcon.password=\n" +
+                "player-idle-timeout=0\n" +
+                "debug=false\n" +
+                "force-gamemode=false\n" +
+                "rate-limit=0\n" +
+                "hardcore=false\n" +
+                "white-list=false\n" +
+                "broadcast-console-to-ops=true\n" +
+                "spawn-npcs=true\n" +
+                "spawn-animals=true\n" +
+                "snooper-enabled=true\n" +
+                "function-permission-level=2\n" +
+                "level-type=default\n" +
+                "text-filtering-config=\n" +
+                "spawn-monsters=true\n" +
+                "enforce-whitelist=false\n" +
+                "resource-pack-sha1=\n" +
+                "spawn-protection=16\n" +
+                "max-world-size=29999984\n");
+        serverprop.close();
+        moveToServerDirectory(serverName, "server.properties");
 
-    public static void createBungeeCordConfig(String serverName) {
-
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void createStartFile(String serverName, ServerType serverType, int ram) {
         try {
             FileWriter eula = new FileWriter("start.sh");
             if (serverType == ServerType.PAPER) {
-                eula.write("java Xms" + ram + "M -Xmx" + ram + "M -jar paper.jar -nogui \n" +
+                eula.write("java -Xms" + ram + "M -Xmx" + ram + "M -jar paper.jar -nogui \n" +
                         "pause");
             } else if (serverType == ServerType.SPIGOT) {
-                eula.write("java Xms" + ram + "M -Xmx" + ram + "M -jar spigot.jar \n" +
+                eula.write("java -Xms" + ram + "M -Xmx" + ram + "M -jar spigot.jar \n" +
                         "pause");
             } else if (serverType == ServerType.BUNGEECORD) {
-                eula.write("java Xms" + ram + "M -Xmx" + ram + "M -jar bungeecord.jar \n" +
+                eula.write("java -Xms" + ram + "M -Xmx" + ram + "M -jar bungeecord.jar \n" +
                         "pause");
             }
             eula.close();
