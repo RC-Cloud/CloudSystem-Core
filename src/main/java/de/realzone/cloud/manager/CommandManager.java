@@ -60,10 +60,9 @@ public class CommandManager {
 
     public void readCommand() {
 
-        String answer;
         while (true) {
-            System.out.print(Color.RED + "CloudSystem " + Color.WHITE + "» " + Color.RESET + "\r");
-            answer = scanner.nextLine();
+            System.out.print(Color.RED + "CloudSystem " + Color.WHITE + "» " + Color.RESET);
+            String answer = scanner.nextLine();
 
             String command = answer.split(" ")[0];
             String[] args = Utils.dropFirstString(answer.split(" "));
