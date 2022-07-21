@@ -3,8 +3,9 @@ package de.realzone.cloud.manager;
 import de.realzone.cloud.RCCloud;
 import de.realzone.cloud.command.Command;
 import de.realzone.cloud.command.commands.ShutdownCommand;
-import de.realzone.cloud.command.commands.plugin.DownloadPlugin;
-import de.realzone.cloud.command.commands.plugin.PluginHelpCommand;
+import de.realzone.cloud.command.commands.plugin.DownloadPluginCommand;
+import de.realzone.cloud.command.commands.plugin.GoInPluginMode;
+import de.realzone.cloud.command.commands.plugin.MovePluginCommand;
 import de.realzone.cloud.command.commands.service.*;
 import de.realzone.cloud.utils.Color;
 import de.realzone.cloud.utils.MessageType;
@@ -49,9 +50,11 @@ public class CommandManager {
         //Service Commands
         addCommand(new GoInServiceMode());
 
-        addCommand(new PluginHelpCommand());
+        //Plugin Commands
+        addCommand(new GoInPluginMode());
+
+        //Other
         addCommand(new ShutdownCommand());
-        addCommand(new DownloadPlugin());
     }
 
     public Set<Command> getCommands() {
@@ -67,8 +70,6 @@ public class CommandManager {
             String command = answer.split(" ")[0];
             String[] args = Utils.dropFirstString(answer.split(" "));
 
-
-            System.out.println(command + Arrays.toString(args));
             executeCommand(command, args);
 
         }

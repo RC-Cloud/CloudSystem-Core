@@ -5,20 +5,12 @@ import de.realzone.cloud.RCCloud;
 import de.realzone.cloud.api.enums.ServerType;
 import de.realzone.cloud.api.utils.APIUtils;
 import de.realzone.cloud.api.utils.DownloadSoftware;
-import de.realzone.cloud.utils.Color;
 import de.realzone.cloud.utils.MessageType;
-import org.apache.commons.io.IOUtils;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 
 import java.io.File;
 import java.io.Reader;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.Map;
 
 
@@ -98,20 +90,35 @@ public class CloudAPI {
         }
     }
 
-    public static void changeServerSoftware(String serverName, ServerType serverType) {
+    public static void changeServerSoftware(String serverName, ServerType serverType, String version) {
+        switch (serverType) {
+            case BUNGEECORD:
+                DownloadSoftware.downloadSoftwareBungeeCord();
+                APIUtils.moveToServerDirectory(serverName, "bungeecord.jar");
+                break;
 
+            case PAPER:
+                DownloadSoftware.downloadSoftwarePaper(version);
+                APIUtils.moveToServerDirectory(serverName, "paper.jar");
+                break;
+
+            case SPIGOT:
+                DownloadSoftware.downloadSoftwareSpigot(version);
+                APIUtils.moveToServerDirectory(serverName, "spigot.jar");
+                break;
+        }
     }
 
     public static void changeName(String serverName, String newName) {
-
+        APIUtils.renameFile(serverName, newName);
     }
 
-    public static void changeRam(String serverName, int ram) {
-
+    public static void changeRam(String serverName, ServerType serverType, int ram) {
+        APIUtils.createStartFile(serverName, serverType, ram);
     }
 
     public static void changePort(String serverName, int port) {
-
+        APIUtils.createServerProperties(serverName, port);
     }
 
     public static void startServer(String serverName) {
@@ -122,7 +129,9 @@ public class CloudAPI {
     }
 
     public static void stopServer(String serverName) {
-
+        //screen -S sessionname -X stuff 'command'`echo -ne '\015'`
+        ProcessBuilder processBuilder = new ProcessBuilder();
+        processBuilder.command("screen -S " + serverName + " -X stuff 'stop'`echo -ne '\015'`");
     }
 
     public static boolean isServerOnline(String serverName) {
@@ -133,7 +142,10 @@ public class CloudAPI {
 
     }
 
-    public static void sendCommand(String serverName) {
+    public static void sendCommand(String serverName, String command) {
 
+        //screen -S sessionname -X stuff 'command'`echo -ne '\015'`
+        ProcessBuilder processBuilder = new ProcessBuilder();
+        processBuilder.command("screen -S " + serverName + " -X stuff '" + command + "'`echo -ne '\015'`");
     }
 }
