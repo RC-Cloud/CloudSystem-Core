@@ -9,14 +9,9 @@ import java.util.Scanner;
 
 import static de.realzone.cloud.utils.Utils.sendServiceHelpMessage;
 
-public class ServiceDeleteCommand extends Command {
+public class ServiceDeleteCommand {
 
-    public ServiceDeleteCommand() {
-        super("service");
-    }
-
-    @Override
-    public void onCommand(String[] args) {
+    public static void onService(String[] args) {
 
         if (args.length == 0) {
             sendServiceHelpMessage();

@@ -21,6 +21,7 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Map;
 
+
 public class CloudAPI {
 
     public static void createServer(String version, ServerType serverType, int ram, int port) {
@@ -59,14 +60,14 @@ public class CloudAPI {
 
                 Map<?, ?> map = gson.fromJson(reader, Map.class);
 
-            //    JSONObject json = (JSONObject)new JSONParser().parse(IOUtils.toString(new URL("https://mcapi.us/server/status?ip=" + map.get("ip") + "&port=" + map.get("port")), StandardCharsets.UTF_8));
+                //    JSONObject json = (JSONObject)new JSONParser().parse(IOUtils.toString(new URL("https://mcapi.us/server/status?ip=" + map.get("ip") + "&port=" + map.get("port")), StandardCharsets.UTF_8));
 
                 RCCloud.getConsoleManager().sendMessage(" ", MessageType.NOTHING);
                 RCCloud.getConsoleManager().sendMessage("Name: " + map.get("name"), MessageType.NOTHING);
                 RCCloud.getConsoleManager().sendMessage("Version: " + map.get("version"), MessageType.NOTHING);
                 RCCloud.getConsoleManager().sendMessage("Port: " + map.get("port").toString().split("\\.")[0], MessageType.NOTHING);
                 RCCloud.getConsoleManager().sendMessage("Server Software: " + map.get("type"), MessageType.NOTHING);
-          //      RCCloud.getConsoleManager().sendMessage("Status: " + ((Boolean) json.get("online") ? Color.GREEN + "Online" + Color.RESET : Color.RED + "Offline" + Color.RESET), MessageType.NOTHING);
+                //      RCCloud.getConsoleManager().sendMessage("Status: " + ((Boolean) json.get("online") ? Color.GREEN + "Online" + Color.RESET : Color.RED + "Offline" + Color.RESET), MessageType.NOTHING);
                 RCCloud.getConsoleManager().sendMessage(" ", MessageType.NOTHING);
 
                 reader.close();
@@ -76,7 +77,7 @@ public class CloudAPI {
             }
 
         }else{
-            RCCloud.getCloudManager().getProperties().getProperty("server_not_found");
+            RCCloud.getCloudManager().getLangProperties().getProperty("server_not_found");
         }
     }
 
@@ -114,6 +115,9 @@ public class CloudAPI {
     }
 
     public static void startServer(String serverName) {
+        ProcessBuilder processBuilder = new ProcessBuilder();
+
+        processBuilder.command("/home/servers/" + serverName + "/start.sh");
 
     }
 

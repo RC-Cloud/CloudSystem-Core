@@ -6,11 +6,13 @@ import org.json.simple.JSONObject;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.Arrays;
 
 public class APIUtils {
 
@@ -190,6 +192,25 @@ public class APIUtils {
         } else {
             return false;
         }
+    }
+
+    public static void listServers(){
+        File file = new File("/home/servers/");
+        String[] directories = file.list(new FilenameFilter() {
+            @Override
+            public boolean accept(File current, String name) {
+                return new File(current, name).isDirectory();
+            }
+        });
+
+        int i = 0;
+        for(String key : Arrays.asList(directories)){
+            if(!key.contains(".")){
+                i++;
+                System.out.println(i + ". " + key + "");
+            }
+        }
+        i = 0;
     }
 
     public static boolean deleteServer(File directory) {

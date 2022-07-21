@@ -9,14 +9,9 @@ import de.realzone.cloud.utils.Utils;
 import java.util.Scanner;
 
 
-public class ServiceInfoCommand extends Command {
+public class ServiceInfoCommand {
 
-    public ServiceInfoCommand() {
-        super("service");
-    }
-
-    @Override
-    public void onCommand(String[] args) {
+    public static void onService(String[] args) {
         if(args.length == 0){
             Utils.sendServiceHelpMessage();
 
