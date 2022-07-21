@@ -5,8 +5,7 @@ import de.realzone.cloud.command.Command;
 import de.realzone.cloud.command.commands.ShutdownCommand;
 import de.realzone.cloud.command.commands.plugin.DownloadPlugin;
 import de.realzone.cloud.command.commands.plugin.PluginHelpCommand;
-import de.realzone.cloud.command.commands.service.ServiceCreateCommand;
-import de.realzone.cloud.command.commands.service.ServiceDeleteCommand;
+import de.realzone.cloud.command.commands.service.*;
 import de.realzone.cloud.utils.Color;
 import de.realzone.cloud.utils.MessageType;
 import de.realzone.cloud.utils.Utils;
@@ -32,7 +31,7 @@ public class CommandManager {
         if (cmd != null) {
             cmd.onCommand(args);
         } else {
-            RCCloud.getConsoleManager().sendMessage(RCCloud.getCloudManager().getProperties().getProperty("command_not_found"), MessageType.INFO);
+            RCCloud.getConsoleManager().sendMessage(RCCloud.getCloudManager().getLangProperties().getProperty("command_not_found"), MessageType.INFO);
         }
     }
 
@@ -47,10 +46,11 @@ public class CommandManager {
     }
 
     public void loadCommands() {
-        addCommand(new ShutdownCommand());
-        addCommand(new ServiceCreateCommand());
-        addCommand(new ServiceDeleteCommand());
+        //Service Commands
+        addCommand(new GoInServiceMode());
+
         addCommand(new PluginHelpCommand());
+        addCommand(new ShutdownCommand());
         addCommand(new DownloadPlugin());
     }
 
@@ -67,6 +67,8 @@ public class CommandManager {
             String command = answer.split(" ")[0];
             String[] args = Utils.dropFirstString(answer.split(" "));
 
+
+            System.out.println(command + Arrays.toString(args));
             executeCommand(command, args);
 
         }

@@ -5,7 +5,7 @@ import java.util.Properties;
 
 public class CloudManager {
 
-    public Properties getProperties(){
+    public Properties getLangProperties(){
         Properties properties = new Properties();
         try {
             properties.load(this.getClass().getClassLoader().getResourceAsStream("lang.properties"));

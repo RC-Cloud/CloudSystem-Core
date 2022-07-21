@@ -6,10 +6,13 @@ import org.json.simple.JSONObject;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.Arrays;
 
 public class APIUtils {
 
@@ -17,6 +20,15 @@ public class APIUtils {
         try {
             createServerDirectory(serverName);
             Files.move(Paths.get(fileName), Paths.get("/home/servers/" + serverName + "/" + fileName), StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void moveToDirecotry(String serverName, String path, String fileName) {
+        try {
+            createServerDirectory(serverName);
+            Files.move(Paths.get(fileName), Paths.get("/home/servers/" + serverName + "/" + path + "/" + fileName), StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -173,51 +185,101 @@ public class APIUtils {
         }
     }
 
+    public static boolean findServer(String serverName){
+        Path serverPath = Paths.get("/home/servers/" + serverName);
+        if(Files.exists(serverPath)){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static void listServers(){
+        File file = new File("/home/servers/");
+        String[] directories = file.list(new FilenameFilter() {
+            @Override
+            public boolean accept(File current, String name) {
+                return new File(current, name).isDirectory();
+            }
+        });
+
+        int i = 0;
+        for(String key : Arrays.asList(directories)){
+            if(!key.contains(".")){
+                i++;
+                System.out.println(i + ". " + key + "");
+            }
+        }
+        i = 0;
+    }
+
+    public static boolean deleteServer(File directory) {
+        if(directory.exists()){
+            File[] files = directory.listFiles();
+            if(null!=files){
+                for(int i=0; i<files.length; i++) {
+                    if(files[i].isDirectory()) {
+                        deleteServer(files[i]);
+                    }
+                    else {
+                        files[i].delete();
+                    }
+                }
+            }
+        }
+        return(directory.delete());
+    }
+
     public static void installPlugins(String serverName, Plugins pluginName) {
+
+        File directory = new File("/home/servers/" + serverName + "/plugins/");
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
 
         if(pluginName == Plugins.ESSENTIALSX){
             DownloadSoftware.downloadPlugin("EssentialsX", "https://github.com/EssentialsX/Essentials/releases/download/2.19.4/EssentialsX-2.19.4.jar");
-            moveToServerDirectory(serverName, "EssentialsX.jar");
+            moveToDirecotry(serverName, "plugins", "EssentialsX.jar");
 
         }else if(pluginName == Plugins.LUCKPERMS){
             DownloadSoftware.downloadPlugin("LuckPerms", "https://download.luckperms.net/1441/bukkit/loader/LuckPerms-Bukkit-5.4.33.jar");
-            moveToServerDirectory(serverName, "LuckPerms.jar");
+            moveToDirecotry(serverName, "plugins", "LuckPerms.jar");
 
         }else if(pluginName == Plugins.MAINTENANCE){
             DownloadSoftware.downloadPlugin("Maintenance", "https://github.com/kennytv/Maintenance/releases/download/4.0.1/Maintenance.jar");
-            moveToServerDirectory(serverName, "Maintenance.jar");
+            moveToDirecotry(serverName, "plugins", "Maintenance.jar");
 
         }else if(pluginName == Plugins.PEX){
             DownloadSoftware.downloadPlugin("PermissionsEX", "https://github.com/PEXPlugins/PermissionsEx/releases/download/STABLE-1.23.4/PermissionsEx-1.23.4.jar");
-            moveToServerDirectory(serverName, "PermissionsEX.jar");
+            moveToDirecotry(serverName, "plugins", "PermissionsEX.jar");
 
         }else if(pluginName == Plugins.PROTOCOLLIB){
             DownloadSoftware.downloadPlugin("ProtocolLib ", "https://github.com/dmulloy2/ProtocolLib/releases/download/4.8.0/ProtocolLib.jar");
-            moveToServerDirectory(serverName, "ProtocolLib.jar");
+            moveToDirecotry(serverName, "plugins", "ProtocolLib.jar");
 
         }else if(pluginName == Plugins.TAB){
             DownloadSoftware.downloadPlugin("Tab", "https://github.com/NEZNAMY/TAB/releases/download/3.1.2/TAB.v3.1.2.jar");
-            moveToServerDirectory(serverName, "Tab.jar");
+            moveToDirecotry(serverName, "plugins", "Tab.jar");
 
         }else if(pluginName == Plugins.VAULT){
             DownloadSoftware.downloadPlugin("Vault", "https://github.com/MilkBowl/Vault/releases/download/1.7.3/Vault.jar");
-            moveToServerDirectory(serverName, "Vault.jar");
+            moveToDirecotry(serverName, "plugins", "Vault.jar");
 
         }else if(pluginName == Plugins.VIABACKWARDS){
             DownloadSoftware.downloadPlugin("ViaBackwards", "https://github.com/ViaVersion/ViaBackwards/releases/download/4.3.1/ViaBackwards-4.3.1.jar");
-            moveToServerDirectory(serverName, "ViaBackwards.jar");
+            moveToDirecotry(serverName, "plugins", "ViaBackwards.jar");
 
         }else if(pluginName == Plugins.VIAVERSION){
             DownloadSoftware.downloadPlugin("ViaVersion", "https://github.com/ViaVersion/ViaVersion/releases/download/4.3.1/ViaVersion-4.3.1.jar");
-            moveToServerDirectory(serverName, "ViaVersion.jar");
+            moveToDirecotry(serverName, "plugins", "ViaVersion.jar");
 
         }else if(pluginName == Plugins.WORLDEDIT){
             DownloadSoftware.downloadPlugin("Worldedit", "https://dev.bukkit.org/projects/worldedit/files/latest");
-            moveToServerDirectory(serverName, "Worldedit.jar");
+            moveToDirecotry(serverName, "plugins", "Worldedit.jar");
 
         }else if(pluginName == Plugins.WORLDGUARD){
             DownloadSoftware.downloadPlugin("WorldGuard", "https://dev.bukkit.org/projects/worldguard/files/latest");
-            moveToServerDirectory(serverName, "WorldGuard.jar");
+            moveToDirecotry(serverName, "plugins", "WorldGuard.jar");
 
         }
 
