@@ -162,13 +162,13 @@ public class APIUtils {
         try {
             FileWriter eula = new FileWriter("start.sh");
             if (serverType == ServerType.PAPER) {
-                eula.write("java -Xms" + ram + "M -Xmx" + ram + "M -jar paper.jar -nogui \n" +
+                eula.write("screen -xmS " + serverName + " java -Xms" + ram + "M -Xmx" + ram + "M -jar paper.jar -nogui \n" +
                         "pause");
             } else if (serverType == ServerType.SPIGOT) {
-                eula.write("java -Xms" + ram + "M -Xmx" + ram + "M -jar spigot.jar \n" +
+                eula.write("screen -xmS " + serverName + " java -Xms" + ram + "M -Xmx" + ram + "M -jar spigot.jar \n" +
                         "pause");
             } else if (serverType == ServerType.BUNGEECORD) {
-                eula.write("java -Xms" + ram + "M -Xmx" + ram + "M -jar bungeecord.jar \n" +
+                eula.write("screen -xmS " + serverName + " java -Xms" + ram + "M -Xmx" + ram + "M -jar bungeecord.jar \n" +
                         "pause");
             }
             eula.close();

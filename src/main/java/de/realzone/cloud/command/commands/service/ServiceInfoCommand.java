@@ -12,16 +12,13 @@ import java.util.Scanner;
 public class ServiceInfoCommand {
 
     public static void onService(String[] args) {
-        if(args.length == 0){
-            Utils.sendServiceHelpMessage();
 
-        } else if (args.length == 1 && args[0].equalsIgnoreCase("info")) {
-            Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
 
-            RCCloud.getConsoleManager().sendMessage("Enter the service to get info: ", MessageType.SAMELINE);
-            String serverName = scanner.nextLine();
+        RCCloud.getConsoleManager().sendMessage(RCCloud.getCloudManager().getLangProperties().getProperty("input_server_name"), MessageType.SAMELINE);
+        String serverName = scanner.nextLine();
 
-            CloudAPI.getInformation(serverName);
-        }
+        CloudAPI.getInformation(serverName);
+
     }
 }

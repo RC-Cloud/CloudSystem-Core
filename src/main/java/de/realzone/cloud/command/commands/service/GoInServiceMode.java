@@ -26,29 +26,41 @@ public class GoInServiceMode extends Command {
             || command.equalsIgnoreCase("quit") || command.equalsIgnoreCase("leave")){
                 break;
 
-            }else if(command.equalsIgnoreCase("help")) {
+            }
+            if(command.equalsIgnoreCase("help")) {
                 Utils.sendServiceHelpMessage();
 
-            }else if(command.equalsIgnoreCase("create")){
+            }
+            if(command.equalsIgnoreCase("create")){
                 ServiceCreateCommand.onService(commandArgs);
 
-            }else if(command.equalsIgnoreCase("delete")){
+            }
+            if(command.equalsIgnoreCase("delete")){
                 ServiceDeleteCommand.onService(commandArgs);
 
-            }else if(command.equalsIgnoreCase("info")){
+            }
+            if(command.equalsIgnoreCase("info")){
                 ServiceInfoCommand.onService(commandArgs);
 
-            }else if(command.equalsIgnoreCase("list")){
+            }
+            if(command.equalsIgnoreCase("list")){
                 ServiceListCommand.onService(commandArgs);
 
-            }else if(command.equalsIgnoreCase("start")){
-                ServiceListCommand.onService(commandArgs);
+            }
+            if(command.equalsIgnoreCase("stop")){
+                ServiceStopCommand.onService(commandArgs);
 
-            }else if(command.equalsIgnoreCase("stop")){
-                ServiceListCommand.onService(commandArgs);
+            }
+            if(command.equalsIgnoreCase("start")){
+                ServiceStartCommand.onService(commandArgs);
 
-            }else if(command.equalsIgnoreCase("restart")){
+            }
+            if(command.equalsIgnoreCase("restart")){
                 ServiceRestartCommand.onService(commandArgs);
+
+            }
+            if(command.equalsIgnoreCase("send")){
+                ServiceSendCommand.onService(commandArgs);
             }
         }
     }

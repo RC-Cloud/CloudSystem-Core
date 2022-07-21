@@ -3,22 +3,13 @@ package de.realzone.cloud.command.commands.plugin;
 import de.realzone.cloud.RCCloud;
 import de.realzone.cloud.api.enums.Plugins;
 import de.realzone.cloud.api.utils.APIUtils;
-import de.realzone.cloud.command.Command;
 import de.realzone.cloud.utils.MessageType;
 
 import java.util.Scanner;
 
-public class DownloadPlugin extends Command {
+public class DownloadPluginCommand {
 
-    public DownloadPlugin() {
-        super("plugin");
-    }
-
-    @Override
-    public void onCommand(String[] args) {
-        if(args.length == 0){
-            PluginHelpCommand.help();
-        } else if (args[0].equalsIgnoreCase("download")) {
+    public static void onPlugin(String[] args) {
 
             Scanner scanner = new Scanner(System.in);
             RCCloud.getConsoleManager().sendMessage(RCCloud.getCloudManager().getLangProperties().getProperty("input_server_name"), MessageType.SAMELINE);
@@ -72,7 +63,6 @@ public class DownloadPlugin extends Command {
                 APIUtils.installPlugins(serverName, Plugins.VIABACKWARDS);
                 RCCloud.getConsoleManager().sendMessage(RCCloud.getCloudManager().getLangProperties().getProperty("plugin_installed"), MessageType.INFO);
 
-            }
         }
     }
 }

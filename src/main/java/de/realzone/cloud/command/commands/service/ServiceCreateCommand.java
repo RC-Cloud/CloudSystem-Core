@@ -15,13 +15,7 @@ public class ServiceCreateCommand {
 
     public static void onService(String[] args) {
 
-        if (args.length == 0) {
-            sendServiceHelpMessage();
-
-        } else if (args[0].equalsIgnoreCase("create")) {
             Scanner scanner = new Scanner(System.in);
-
-            System.out.println("test");
 
             RCCloud.getConsoleManager().sendMessage(RCCloud.getCloudManager().getLangProperties().getProperty("service_create_name"), MessageType.SAMELINE);
             String serviceName = scanner.nextLine();
@@ -105,6 +99,5 @@ public class ServiceCreateCommand {
             }
             APIUtils.createEula(serviceName);
             RCCloud.getConsoleManager().sendMessage(RCCloud.getCloudManager().getLangProperties().getProperty("service_created"), MessageType.INFO);
-        }
     }
 }
