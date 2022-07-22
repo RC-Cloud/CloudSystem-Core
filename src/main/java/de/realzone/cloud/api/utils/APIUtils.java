@@ -1,7 +1,9 @@
 package de.realzone.cloud.api.utils;
 
+import de.realzone.cloud.RCCloud;
 import de.realzone.cloud.api.enums.Plugins;
 import de.realzone.cloud.api.enums.ServerType;
+import de.realzone.cloud.utils.MessageType;
 import org.json.simple.JSONObject;
 
 import java.io.File;
@@ -31,6 +33,25 @@ public class APIUtils {
             Files.move(Paths.get(fileName), Paths.get("/home/servers/" + serverName + "/" + path + "/" + fileName), StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public static void movePlugin(String oldService, String newService, String plugin){
+
+        try {
+            Files.move(Paths.get("/home/servers/" + oldService + "/plugins/" + plugin), Paths.get("/home/servers/" + newService + "/plugins/" + plugin), StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void deleteFile(String path, String file){
+        File file1 = new File(path + "/" + file);
+        if(file1.delete()){
+            //Deleted file successfully
+        }else {
+            RCCloud.getConsoleManager().sendMessage("Could not delete file", MessageType.ERROR);
+            return;
         }
     }
 
@@ -192,6 +213,21 @@ public class APIUtils {
         } else {
             return false;
         }
+    }
+
+    public static void listPlugins(String serverName){
+        File file = new File("/home/servers/" + serverName + "/plugins");
+        if(file.exists()){
+            int i = 0;
+
+            File[] files = file.listFiles();
+            for(File f : files){
+                i++;
+                System.out.println(i + ". " + f.getName());
+            }
+            i = 0;
+        }
+
     }
 
     public static void listServers(){
