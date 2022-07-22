@@ -114,6 +114,69 @@ public class APIUtils {
         moveToServerDirectory(serverName, "cloud.json");
     }
 
+    public static void createBungeeConfig(String serverName, int port, String minecraftUser){
+        FileWriter config = null;
+        try {
+            config = new FileWriter("config.yml");
+
+            config.write("server_connect_timeout: 5000\n" +
+                    "remote_ping_cache: -1\n" +
+                    "forge_support: false\n" +
+                    "player_limit: -1\n" +
+                    "permissions:\n" +
+                    "  default:\n" +
+                    "  - bungeecord.command.server\n" +
+                    "  - bungeecord.command.list\n" +
+                    "  admin:\n" +
+                    "  - bungeecord.command.alert\n" +
+                    "  - bungeecord.command.end\n" +
+                    "  - bungeecord.command.ip\n" +
+                    "  - bungeecord.command.reload\n" +
+                    "timeout: 30000\n" +
+                    "log_commands: false\n" +
+                    "network_compression_threshold: 256\n" +
+                    "online_mode: true\n" +
+                    "disabled_commands:\n" +
+                    "- disabledcommandhere\n" +
+                    "servers:\n" +
+                    "  lobby:\n" +
+                    "    motd: '&1Just another BungeeCord - Forced Host'\n" +
+                    "    address: localhost:25565\n" +
+                    "    restricted: false\n" +
+                    "listeners:\n" +
+                    "- query_port: " + port + "\n" +
+                    "  motd: '&1Another Bungee server'\n" +
+                    "  tab_list: GLOBAL_PING\n" +
+                    "  query_enabled: false\n" +
+                    "  proxy_protocol: false\n" +
+                    "  forced_hosts:\n" +
+                    "    pvp.md-5.net: pvp\n" +
+                    "  ping_passthrough: false\n" +
+                    "  priorities:\n" +
+                    "  - lobby\n" +
+                    "  bind_local_address: true\n" +
+                    "  host: 0.0.0.0:" + port + "\n" +
+                    "  max_players: 1\n" +
+                    "  tab_size: 60\n" +
+                    "  force_default_server: false\n" +
+                    "ip_forward: false\n" +
+                    "remote_ping_timeout: 5000\n" +
+                    "prevent_proxy_connections: false\n" +
+                    "groups:\n" +
+                    "  " + minecraftUser + ":\n" +
+                    "  - admin\n" +
+                    "connection_throttle: 4000\n" +
+                    "stats: a95423b9-1ec5-41a4-a085-7c3e22c280d1\n" +
+                    "connection_throttle_limit: 3\n" +
+                    "log_pings: true\n");
+            config.close();
+            moveToServerDirectory(serverName, "config.yml");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void createServerProperties(String serverName, int port) {
         FileWriter serverprop = null;
         try {

@@ -34,6 +34,10 @@ public class ServiceCreateCommand {
                     RCCloud.getConsoleManager().sendMessage(RCCloud.getCloudManager().getLangProperties().getProperty("service_create_port"), MessageType.SAMELINE);
                     int port = Integer.parseInt(scanner.nextLine());
 
+                    RCCloud.getConsoleManager().sendMessage(RCCloud.getCloudManager().getLangProperties().getProperty("service_bungee_minecraft_username"), MessageType.SAMELINE);
+                    String username = scanner.nextLine();
+
+                    APIUtils.createBungeeConfig(serviceName, port, username);
                     APIUtils.createStartFile(serviceName, ServerType.BUNGEECORD, ram);
                     APIUtils.createJsonFile(serviceName, "1.19", ServerType.BUNGEECORD, ram, port);
 

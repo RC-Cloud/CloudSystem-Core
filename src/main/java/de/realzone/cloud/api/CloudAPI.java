@@ -110,15 +110,15 @@ public class CloudAPI {
     }
 
     public static void changeName(String serverName, String newName) {
-        APIUtils.renameFile(serverName, newName);
+        APIUtils.renameFile(serverName, newName); //TODO change name in cloud.json
     }
 
     public static void changeRam(String serverName, ServerType serverType, int ram) {
-        APIUtils.createStartFile(serverName, serverType, ram);
+        APIUtils.createStartFile(serverName, serverType, ram); //TODO change ram in cloud.json
     }
 
     public static void changePort(String serverName, int port) {
-        APIUtils.createServerProperties(serverName, port);
+        APIUtils.createServerProperties(serverName, port); //TODO change port in cloud.json
     }
 
     public static void startServer(String serverName) {

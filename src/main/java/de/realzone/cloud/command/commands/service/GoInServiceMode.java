@@ -62,6 +62,10 @@ public class GoInServiceMode extends Command {
             if(command.equalsIgnoreCase("send")){
                 ServiceSendCommand.onService(commandArgs);
             }
+
+            if(command.equalsIgnoreCase("update")){
+                ServiceUpdateCommand.onService(commandArgs);
+            }
         }
     }
 }
