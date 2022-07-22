@@ -26,16 +26,21 @@ public class GoInPluginMode extends Command {
             if(command.equalsIgnoreCase("exit") || command.equalsIgnoreCase("plugin")
                 || command.equalsIgnoreCase("quit") || command.equalsIgnoreCase("leave")){
                 break;
+
             }else if(command.equalsIgnoreCase("help")) {
                 Utils.sendPluginHelpMessage();
+
             }else if(command.equalsIgnoreCase("download")){
                 DownloadPluginCommand.onPlugin(commandArgs);
+
             }else if(command.equalsIgnoreCase("move")){
                 MovePluginCommand.onPlugin(commandArgs);
+
             }else if(command.equalsIgnoreCase("delete")){
+                DeletePluginCommand.onPlugin(commandArgs);
 
             }else if(command.equalsIgnoreCase("list")){
-
+                PluginListCommand.onPlugin(commandArgs);
             }
         }
     }

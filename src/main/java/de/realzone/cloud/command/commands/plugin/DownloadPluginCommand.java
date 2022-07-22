@@ -21,7 +21,7 @@ public class DownloadPluginCommand {
 
             if(pluginName.equalsIgnoreCase("Luckperms")){
                 APIUtils.installPlugins(serverName, Plugins.LUCKPERMS);
-                RCCloud.getConsoleManager().sendMessage("LuckPerms installed!", MessageType.INFO);
+                RCCloud.getConsoleManager().sendMessage(RCCloud.getCloudManager().getLangProperties().getProperty("plugin_installed"), MessageType.INFO);
 
             }else if(pluginName.equalsIgnoreCase("PermissionsEx") || pluginName.equalsIgnoreCase("Pex")){
                 APIUtils.installPlugins(serverName, Plugins.PEX);

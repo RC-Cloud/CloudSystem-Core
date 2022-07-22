@@ -21,7 +21,7 @@ public class MovePluginCommand  {
         RCCloud.getConsoleManager().sendMessage(RCCloud.getCloudManager().getLangProperties().getProperty("move_plugin_to_which_service"), MessageType.SAMELINE);
         String targetServerName = scanner.nextLine();
 
-        APIUtils.moveToDirecotry(serverName, targetServerName, pluginName);
+        APIUtils.movePlugin(serverName, targetServerName, pluginName + ".jar");
         RCCloud.getConsoleManager().sendMessage(RCCloud.getCloudManager().getLangProperties().getProperty("move_plugin_success"), MessageType.INFO);
 
 

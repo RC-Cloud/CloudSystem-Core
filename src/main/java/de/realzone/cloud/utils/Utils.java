@@ -13,15 +13,17 @@ public class Utils {
     public static void sendServiceHelpMessage(){
 
         RCCloud.getConsoleManager().sendMessage("\n" +
-                         "send > " + RCCloud.getCloudManager().getLangProperties().getProperty("service_send_command") + "\n" +
-                         "create > " + RCCloud.getCloudManager().getLangProperties().getProperty("service_create") + "\n" +
-                         "delete > " + RCCloud.getCloudManager().getLangProperties().getProperty("service_delete") + "\n" +
-                         "stop > " + RCCloud.getCloudManager().getLangProperties().getProperty("service_stop") + "\n" +
-                         "start > " + RCCloud.getCloudManager().getLangProperties().getProperty("service_start") + "\n" +
-                         "info > " + RCCloud.getCloudManager().getLangProperties().getProperty("service_info") + "\n" +
-                         "restart > " + RCCloud.getCloudManager().getLangProperties().getProperty("service_restart") + "\n" +
-                         "startall (Comming Soon) > " + RCCloud.getCloudManager().getLangProperties().getProperty("service_start_all") + "\n" +
-                         "list > " + RCCloud.getCloudManager().getLangProperties().getProperty("service_list") + "\n",
+                        "help > " + RCCloud.getCloudManager().getLangProperties().getProperty("help") + "\n" +
+                        "send > " + RCCloud.getCloudManager().getLangProperties().getProperty("service_send_command") + "\n" +
+                        "create > " + RCCloud.getCloudManager().getLangProperties().getProperty("service_create") + "\n" +
+                        "delete > " + RCCloud.getCloudManager().getLangProperties().getProperty("service_delete") + "\n" +
+                        "stop > " + RCCloud.getCloudManager().getLangProperties().getProperty("service_stop") + "\n" +
+                        "start > " + RCCloud.getCloudManager().getLangProperties().getProperty("service_start") + "\n" +
+                        "info > " + RCCloud.getCloudManager().getLangProperties().getProperty("service_info") + "\n" +
+                        "restart > " + RCCloud.getCloudManager().getLangProperties().getProperty("service_restart") + "\n" +
+                        "update > " + RCCloud.getCloudManager().getLangProperties().getProperty("service_update") + "\n" +
+                        "startall (Comming Soon) > " + RCCloud.getCloudManager().getLangProperties().getProperty("service_start_all") + "\n" +
+                        "list > " + RCCloud.getCloudManager().getLangProperties().getProperty("service_list") + "\n",
                 MessageType.NOTHING);
     }
 
@@ -31,6 +33,7 @@ public class Utils {
                         "download > " + RCCloud.getCloudManager().getLangProperties().getProperty("plugin_download") + "\n" +
                         "delete > " + RCCloud.getCloudManager().getLangProperties().getProperty("plugin_delete") + "\n" +
                         "list > " + RCCloud.getCloudManager().getLangProperties().getProperty("plugin_list") + "\n" +
+                        "list > " + RCCloud.getCloudManager().getLangProperties().getProperty("help") + "\n" +
                         "move > " + RCCloud.getCloudManager().getLangProperties().getProperty("plugin_move") + "\n",
                 MessageType.NOTHING);
     }
