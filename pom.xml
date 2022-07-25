@@ -36,7 +36,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>de.realzone.cloud.RCCloud</mainClass>
+                            <mainClass>com.rccloud.cloud.RCCloud</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
@@ -50,7 +50,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>de.realzone.cloud.RCCloud</mainClass>
+                            <mainClass>com.rccloud.cloud.RCCloud</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
