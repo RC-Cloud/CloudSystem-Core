@@ -30,6 +30,30 @@ public class GoInScreenMode extends Command {
             }else if(command.equalsIgnoreCase("help")) {
                 Utils.sendScreenHelpMessage();
 
+            }else if(command.equalsIgnoreCase("start")){
+                ScreenStartCommand.onScreen(commandArgs);
+
+            }else if(command.equalsIgnoreCase("stop")){
+                ScreenStopCommand.onScreen(commandArgs);
+
+            }else if(command.equalsIgnoreCase("stopall")){
+                ScreenStopAllCommand.onScreen(commandArgs);
+
+            }else if(command.equalsIgnoreCase("list")){
+                ScreenListCommand.onScreen(commandArgs);
+
+            }else if(command.equalsIgnoreCase("view")){
+                ScreenViewCommand.onScreen(commandArgs);
+
+            }else if(command.equalsIgnoreCase("write")){
+                ScreenWriteCommand.onScreen(commandArgs);
+
+            }else if(command.equalsIgnoreCase("goin")){
+                IntoScreenCommand.onScreen(commandArgs);
+
+            }else if(command.equalsIgnoreCase("killall")){
+                ScreenKillAllCommand.onScreen(commandArgs);
+
             }
         }
 
