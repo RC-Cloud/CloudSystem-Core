@@ -4,6 +4,7 @@ import com.rccloud.cloud.command.Command;
 import com.rccloud.cloud.command.commands.plugin.GoInPluginMode;
 import com.rccloud.cloud.RCCloud;
 import com.rccloud.cloud.command.commands.ShutdownCommand;
+import com.rccloud.cloud.command.commands.screen.GoInScreenMode;
 import com.rccloud.cloud.command.commands.service.GoInServiceMode;
 import com.rccloud.cloud.utils.Color;
 import com.rccloud.cloud.utils.MessageType;
@@ -50,6 +51,9 @@ public class CommandManager {
 
         //Plugin Commands
         addCommand(new GoInPluginMode());
+
+        //Screen Commands
+        addCommand(new GoInScreenMode());
 
         //Other
         addCommand(new ShutdownCommand());

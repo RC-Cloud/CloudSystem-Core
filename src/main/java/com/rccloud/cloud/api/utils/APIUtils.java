@@ -6,6 +6,8 @@ import com.rccloud.cloud.utils.Color;
 import com.rccloud.cloud.utils.MessageType;
 import com.rccloud.cloud.api.enums.Plugins;
 import com.rccloud.cloud.api.enums.ServerType;
+import net.lingala.zip4j.core.ZipFile;
+import net.lingala.zip4j.exception.ZipException;
 import org.apache.commons.io.IOUtils;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -55,7 +57,7 @@ public class APIUtils {
         if(file1.delete()){
             //Deleted file successfully
         }else {
-            RCCloud.getConsoleManager().sendMessage("Could not delete file", MessageType.ERROR);
+            RCCloud.getConsoleManager().sendMessage("Could not delete file (Just Ignore it :D)", MessageType.ERROR);
             return;
         }
     }
@@ -280,6 +282,46 @@ public class APIUtils {
             return true;
         } else {
             return false;
+        }
+    }
+
+    public static void runCommand(String command){
+        ProcessBuilder processBuilder = new ProcessBuilder();
+        processBuilder.command(command);
+    }
+
+    public static void runCommandToServer(String server, String command){
+        ProcessBuilder processBuilder = new ProcessBuilder();
+        processBuilder.command("screen -S " + server + " -X stuff '" + command + "'`echo -ne '\015'`");
+    }
+
+    public static void listFiles(String path, boolean removeExtension){
+        File file = new File(path);
+        if(file.exists()){
+                try {
+                    File[] files = file.listFiles();
+                    for(File f : files){
+                        if (removeExtension){
+                            System.out.println("- " + f.getName().split("\\.")[0]);
+                        }else {
+                            System.out.println("- " + f.getName());
+                        }
+                    }
+
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+        }
+
+    }
+
+    public static void unzipFile(String path, String file, String destination){
+
+        try {
+            ZipFile zipFile = new ZipFile(path + "/" + file);
+            zipFile.extractAll(destination);
+        } catch (ZipException e) {
+            e.printStackTrace();
         }
     }
 
